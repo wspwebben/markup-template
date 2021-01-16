@@ -1,0 +1,34 @@
+/**
+  Second layer of color system:
+  Colors are custom properties (css variables) declared on a root
+  They must have a semantic name
+  They're used in a code, if that is the last color layer
+
+
+  Third layer (optional):
+  Custom properties are declared on a component/block's root
+  If that layer is used, variables from second layer must not be used in code
+  
+  Examples:
+
+  .button {
+    --button-background: var(--color-primary);
+    --button-color: var(--color-text);
+
+    &:hover {
+      --button-background: var(--color-accent);
+    }
+
+    &--ghost {
+      --button-background: transparent;
+    }
+  }
+*/
+
+@use 'base-colors' as *;
+
+:root {
+  --color-primary: #{$black};
+  --color-text: #{$black};
+  --color-background: #{$white};
+}

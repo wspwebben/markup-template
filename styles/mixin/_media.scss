@@ -1,0 +1,36 @@
+/**
+  Examples:
+  @include mixin.media('tablet', to) {}
+  @include mixin.media(400px, from) {}
+ 
+*/
+
+@use 'sass:map';
+@use 'sass:meta';
+@use '../variables';
+
+// Mobile-first
+// if you need a desktop-first, replace direction with 'to'
+@mixin media($screen, $direction: from) { 
+  $screen-size: $screen;
+
+  @if (meta.type-of($screen) == string) {
+    @if (map.has-key(variables.$screens, $screen)) {
+      $screen-size: map.get(variables.$screens, $screen)
+    } @else {
+      @error 'Unknown screen';
+    }
+  }
+
+  @if ($direction == from) {
+    @media (min-width: $screen-size) {
+      @content;
+    }
+  } @else if $direction == to{
+    @media (max-width: $screen-size - 1) {
+      @content;
+    }
+  } @else {
+    @error 'Direction is not supported'
+  }
+}

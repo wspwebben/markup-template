@@ -1,0 +1,7 @@
+$container-width: 1180px;
+
+// Mobile-first
+$screens: (
+  'tablet': 600px,
+  'desktop': $container-width
+);
